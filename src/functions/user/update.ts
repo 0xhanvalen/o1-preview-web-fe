@@ -4,7 +4,7 @@ import { SERVER_LOCATION } from "../lib/env";
 export const updatePassword = async (args: { password: string }) => {
 	const { password } = args;
 	const response = await axios.post(
-		`${SERVER_LOCATION()}/user/update`,
+		`${SERVER_LOCATION}/user/update`,
 		{
 			password,
 		},
@@ -18,7 +18,7 @@ export const updatePassword = async (args: { password: string }) => {
 export const updateAPIKey = async (args: { apiKey: string }) => {
 	const { apiKey } = args;
 	const response = await axios.post(
-		`${SERVER_LOCATION()}/user/update`,
+		`${SERVER_LOCATION}/user/update`,
 		{
 			apiKey,
 		},

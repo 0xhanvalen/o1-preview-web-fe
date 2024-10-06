@@ -7,7 +7,7 @@ export async function create(args: {
 	title: string;
 }) {
 	const response = await axios.post(
-		`${SERVER_LOCATION()}/chats/create`,
+		`${SERVER_LOCATION}/chats/create`,
 		{
 			message: args.message,
 			projectId: args.projectId,

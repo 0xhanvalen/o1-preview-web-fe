@@ -4,7 +4,7 @@ import { SERVER_LOCATION } from "../lib/env";
 export async function create(args: { name: string }) {
 	const { name } = args;
 	const response = await axios.post(
-		`${SERVER_LOCATION()}/projects/create`,
+		`${SERVER_LOCATION}/projects/create`,
 		{
 			name,
 		},
