@@ -13,5 +13,8 @@ export async function login(args: { email: string; password: string }) {
 			withCredentials: true,
 		}
 	);
+	if (!response.data.error) {
+		window.location.href = "/projects";
+	}
 	return response.data;
 }
