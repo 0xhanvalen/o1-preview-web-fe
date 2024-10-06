@@ -17,6 +17,10 @@ export default function ProjectSingle() {
 		return response;
 	};
 	const [projects] = createResource(fetchChat);
+	const handleNameChange = (evt: any) => {
+		console.log(evt.target.value);
+		setNewChatName(evt.target.value);
+	};
 	return (
 		<>
 			<Title>Project</Title>
@@ -28,7 +32,9 @@ export default function ProjectSingle() {
 					<input
 						placeholder="new chat name"
 						value={newChatName()}
-						onInput={(evt) => setNewChatName(evt.target.value)}
+						onInput={(evt) => {
+							handleNameChange(evt);
+						}}
 					/>
 					<textarea
 						placeholder="Your message"

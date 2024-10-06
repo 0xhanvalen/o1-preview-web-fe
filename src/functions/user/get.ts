@@ -1,9 +1,12 @@
 import axios from "axios";
-import { SERVER_LOCATION } from "../lib/env";
+import { config } from "~/config";
 
 export async function get() {
-	const response = await axios.get(`${SERVER_LOCATION}/user/get`, {
-		withCredentials: true,
-	});
+	const response = await axios.get(
+		`${import.meta.env.VITE_SERVER_LOCATION}/user/get`,
+		{
+			withCredentials: true,
+		}
+	);
 	return response.data;
 }

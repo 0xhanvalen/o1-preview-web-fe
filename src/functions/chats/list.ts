@@ -1,9 +1,9 @@
 import axios from "axios";
-import { SERVER_LOCATION } from "../lib/env";
+import { config } from "~/config";
 
 export async function list(args: { projectId: number }) {
 	const response = await axios.post(
-		`${SERVER_LOCATION}/chats/list`,
+		`${import.meta.env.VITE_SERVER_LOCATION}/chats/list`,
 		{
 			projectId: args.projectId,
 		},

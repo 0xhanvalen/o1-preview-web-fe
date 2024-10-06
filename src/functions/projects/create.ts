@@ -1,10 +1,10 @@
 import axios from "axios";
-import { SERVER_LOCATION } from "../lib/env";
+import { config } from "~/config";
 
 export async function create(args: { name: string }) {
 	const { name } = args;
 	const response = await axios.post(
-		`${SERVER_LOCATION}/projects/create`,
+		`${import.meta.env.VITE_SERVER_LOCATION}/projects/create`,
 		{
 			name,
 		},

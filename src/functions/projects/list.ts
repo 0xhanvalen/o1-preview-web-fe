@@ -1,9 +1,12 @@
 import axios from "axios";
-import { SERVER_LOCATION } from "../lib/env";
+import { config } from "~/config";
 
 export async function list() {
-	const response = await axios.get(`${SERVER_LOCATION}/projects/list`, {
-		withCredentials: true,
-	});
+	const response = await axios.get(
+		`${import.meta.env.VITE_SERVER_LOCATION}/projects/list`,
+		{
+			withCredentials: true,
+		}
+	);
 	return response.data.results;
 }

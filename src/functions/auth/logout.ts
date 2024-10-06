@@ -1,8 +1,8 @@
 import axios from "axios";
-import { SERVER_LOCATION } from "../lib/env";
+import { config } from "~/config";
 
 export function logout() {
-	return axios.get(`${SERVER_LOCATION}/user/logout`, {
+	return axios.get(`${import.meta.env.VITE_SERVER_LOCATION}/user/logout`, {
 		withCredentials: true,
 	});
 }
