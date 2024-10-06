@@ -19,7 +19,12 @@ export default function Home() {
 				>
 					Log In
 				</a>
-				<a class="px-8 py-4 border-2">Sign Up</a>
+				<a
+					class="px-8 py-4 border-2"
+					href="/auth/register"
+				>
+					Sign Up
+				</a>
 			</div>
 		</main>
 	);
