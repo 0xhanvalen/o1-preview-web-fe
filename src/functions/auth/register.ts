@@ -10,8 +10,5 @@ export async function register(args: { email: string; password: string }) {
 			password,
 		}
 	);
-	if (!response.data.error) {
-		window.location.href = "/projects";
-	}
 	return response.data;
 }

@@ -1,12 +1,21 @@
 import axios from "axios";
-import { config } from "~/config";
 
 export async function list() {
-	const response = await axios.get(
-		`${import.meta.env.VITE_SERVER_LOCATION}/projects/list`,
-		{
-			withCredentials: true,
+	try {
+		const response = await axios.get(
+			`${import.meta.env.VITE_SERVER_LOCATION}/projects/list`,
+			{
+				withCredentials: true,
+			}
+		);
+		console.log({ data: response.data });
+		if (response.status !== 200) {
+			throw new Error("Failed to fetch projects");
 		}
-	);
-	return response.data.results;
+
+		return response.data.results;
+	} catch (error) {
+		console.error(error);
+		return new Error("Failed to fetch projects");
+	}
 }

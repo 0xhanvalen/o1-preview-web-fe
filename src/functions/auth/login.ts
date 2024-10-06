@@ -13,8 +13,6 @@ export async function login(args: { email: string; password: string }) {
 			withCredentials: true,
 		}
 	);
-	if (!response.data.error) {
-		window.location.href = "/projects";
-	}
+	console.log({ data: response.data });
 	return response.data;
 }

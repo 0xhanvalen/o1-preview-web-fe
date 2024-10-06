@@ -1,3 +1,5 @@
+import api from "~/functions/api";
+
 export default function Home() {
 	return (
 		<main class="text-center mx-auto text-gray-700 p-4 w-fit">
@@ -25,6 +27,12 @@ export default function Home() {
 				>
 					Sign Up
 				</a>
+				<button
+					class="px-8 py-4 bg-gray-100"
+					onMouseDown={() => api.auth.logout()}
+				>
+					Logout
+				</button>
 			</div>
 		</main>
 	);
