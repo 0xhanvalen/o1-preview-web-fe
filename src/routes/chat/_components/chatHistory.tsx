@@ -21,7 +21,7 @@ export default function ChatHistory(args: { chatId: string }) {
 	});
 
 	return (
-		<div class="my-8 mx-auto flex flex-col gap-4">
+		<div class="my-8 mx-auto flex flex-col-reverse gap-4">
 			<ChatInput chatId={args.chatId} />
 			<Show when={loading()}>
 				<p>Loading...</p>
