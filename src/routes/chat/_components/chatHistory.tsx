@@ -22,7 +22,6 @@ export default function ChatHistory(args: { chatId: string }) {
 
 	return (
 		<div class="my-8 mx-auto flex flex-col-reverse relative gap-4">
-			<ChatInput chatId={args.chatId} />
 			<Show when={loading()}>
 				<p>Loading...</p>
 			</Show>
@@ -34,6 +33,7 @@ export default function ChatHistory(args: { chatId: string }) {
 					{(message) => <ChatMessage chatMessage={message} />}
 				</For>
 			</Show>
+			<ChatInput chatId={args.chatId} />
 		</div>
 	);
 }
