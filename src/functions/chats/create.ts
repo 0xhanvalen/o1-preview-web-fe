@@ -17,9 +17,5 @@ export async function create(args: {
 		},
 	});
 
-	if (response.status !== 200) {
-		throw new Error("Failed to create chat");
-	}
-
 	return response.results;
 }

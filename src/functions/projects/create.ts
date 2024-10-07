@@ -11,9 +11,5 @@ export async function create(args: { name: string }) {
 		},
 	});
 
-	if (response.status === 200) {
-		return response.results;
-	} else {
-		throw new Error("Failed to create project");
-	}
+	return response.results;
 }
