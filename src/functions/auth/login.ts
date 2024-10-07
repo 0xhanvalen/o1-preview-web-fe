@@ -15,6 +15,9 @@ export async function login(args: { email: string; password: string }) {
 	);
 	console.log({ data: response.data });
 	if (response.status === 200) {
+		const { httpToken, wsToken } = response.data.result;
+		localStorage.setItem("httpToken", httpToken);
+		localStorage.setItem("wsToken", wsToken);
 		window.location.href = "/projects";
 	}
 	return response.data;

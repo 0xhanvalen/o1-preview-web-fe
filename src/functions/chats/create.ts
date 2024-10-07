@@ -1,21 +1,25 @@
 import axios from "axios";
-import { config } from "../../config";
+import { useAPI } from "../useAPI";
 
 export async function create(args: {
 	message: string;
 	projectId: number;
 	title: string;
 }) {
-	console.log({ args });
-	const response = await axios.post(
-		`${import.meta.env.VITE_SERVER_LOCATION}/chats/create`,
-		{
-			message: args.message,
-			projectId: args.projectId,
-			title: args.title,
+	const { message, projectId, title } = args;
+	const response = await useAPI({
+		url: "/chats/create",
+		method: "POST",
+		data: {
+			message,
+			projectId,
+			title,
 		},
-		{ withCredentials: true }
-	);
+	});
 
-	return response.data.results;
+	if (response.status !== 200) {
+		throw new Error("Failed to create chat");
+	}
+
+	return response.results;
 }

@@ -1,12 +1,13 @@
 import axios from "axios";
-import { config } from "~/config";
+import { useAPI } from "../useAPI";
 
 export async function logout() {
-	const response = await axios.get(
-		`${import.meta.env.VITE_SERVER_LOCATION}/user/logout`,
-		{
-			withCredentials: true,
-		}
-	);
+	const response = await useAPI({
+		url: "/auth/logout",
+		method: "POST",
+	});
+	localStorage.removeItem("httpToken");
+	localStorage.removeItem("wsToken");
 	console.log({ data: response.data });
+	window.location.href = "/";
 }

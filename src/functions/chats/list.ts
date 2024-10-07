@@ -1,16 +1,18 @@
 import axios from "axios";
-import { config } from "~/config";
+import { useAPI } from "../useAPI";
 
 export async function list(args: { projectId: number }) {
-	const response = await axios.post(
-		`${import.meta.env.VITE_SERVER_LOCATION}/chats/list`,
-		{
-			projectId: args.projectId,
+	const { projectId } = args;
+	const response = await useAPI({
+		url: "/chats/list",
+		method: "POST",
+		data: {
+			projectId,
 		},
-		{
-			withCredentials: true,
-		}
-	);
+	});
+	if (response.status !== 200) {
+		throw new Error("Failed to fetch chats");
+	}
 
-	return response.data.results;
+	return response.results;
 }

@@ -1,20 +1,19 @@
 import axios from "axios";
 import { setChat } from "~/routes/chat/signals/chat";
-import { config } from "~/config";
+import { useAPI } from "../useAPI";
 
 export async function update(args: { chatId: string; message: string }) {
-	const response = await axios.post(
-		`${import.meta.env.VITE_SERVER_LOCATION}/chats/update`,
-		{
-			chatId: args.chatId,
-			message: args.message,
+	const { chatId, message } = args;
+	const response = await useAPI({
+		url: `/chats/update`,
+		method: "POST",
+		data: {
+			chatId,
+			message,
 		},
-		{
-			withCredentials: true,
-		}
-	);
-	if (response.data.result) {
-		setChat(response.data.result);
+	});
+	if (response.result) {
+		setChat(response.result);
 	}
-	return response.data.result;
+	return response.result;
 }

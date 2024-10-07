@@ -1,19 +1,16 @@
-import axios from "axios";
+import { useAPI } from "../useAPI";
 
 export async function list() {
 	try {
-		const response = await axios.get(
-			`${import.meta.env.VITE_SERVER_LOCATION}/projects/list`,
-			{
-				withCredentials: true,
-			}
-		);
-		console.log({ data: response.data });
-		if (response.status !== 200) {
+		const response = await useAPI({
+			url: "/projects/list",
+			method: "GET",
+		});
+		if (response.results) {
+			return response.results;
+		} else {
 			throw new Error("Failed to fetch projects");
 		}
-
-		return response.data.results;
 	} catch (error) {
 		console.error(error);
 		return new Error("Failed to fetch projects");

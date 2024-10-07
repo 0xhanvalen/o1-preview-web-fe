@@ -1,14 +1,20 @@
 import axios from "axios";
-import { config } from "~/config";
+import { useAPI } from "../useAPI";
 
 export async function register(args: { email: string; password: string }) {
 	const { email, password } = args;
-	const response = await axios.post(
-		`${import.meta.env.VITE_SERVER_LOCATION}/user/create`,
-		{
+	const response = await useAPI({
+		url: "/auth/register",
+		method: "POST",
+		data: {
 			email,
 			password,
-		}
-	);
-	return response.data;
+		},
+	});
+	if (response.status === 200) {
+		const { httpToken, wsToken } = response.data.result;
+		localStorage.setItem("httpToken", httpToken);
+		localStorage.setItem("wsToken", wsToken);
+		window.location.href = "/projects";
+	}
 }

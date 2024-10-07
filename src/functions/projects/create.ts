@@ -1,17 +1,19 @@
 import axios from "axios";
-import { config } from "~/config";
+import { useAPI } from "../useAPI";
 
 export async function create(args: { name: string }) {
 	const { name } = args;
-	const response = await axios.post(
-		`${import.meta.env.VITE_SERVER_LOCATION}/projects/create`,
-		{
+	const response = await useAPI({
+		url: "/projects/create",
+		method: "POST",
+		data: {
 			name,
 		},
-		{
-			withCredentials: true,
-		}
-	);
+	});
 
-	return response.data.results;
+	if (response.status === 200) {
+		return response.results;
+	} else {
+		throw new Error("Failed to create project");
+	}
 }
