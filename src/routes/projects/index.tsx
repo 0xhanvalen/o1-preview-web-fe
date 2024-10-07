@@ -11,24 +11,12 @@ import api from "~/functions/api";
 import ProjectCard from "./_components/projectCard";
 import { Title } from "@solidjs/meta";
 import Nav from "~/components/Nav";
+import { clientOnly } from "@solidjs/start";
+const ProjectList = clientOnly(() => import("./_components/projectsList"));
 
 const [projectName, setProjectName] = createSignal("");
 
 export default function Projects() {
-	const [projects, set_projects] = createSignal<any>([]);
-	const [loading, setLoading] = createSignal(true);
-	const [error, setError] = createSignal(null);
-	onMount(async () => {
-		try {
-			const data = await api.projects.list();
-			set_projects(data);
-		} catch (err: Error | any) {
-			console.error("Error fetching projects:", err);
-			setError(err.message || "An error occurred");
-		} finally {
-			setLoading(false);
-		}
-	});
 	return (
 		<>
 			<Title>Projects Overview</Title>
@@ -50,25 +38,7 @@ export default function Projects() {
 						Create
 					</button>
 				</div>
-				<div class="my-8 mx-auto flex flex-col gap-4">
-					<Show when={loading()}>
-						<p>Loading...</p>
-					</Show>
-					<Show when={error()}>
-						<p>Error: {error()}</p>
-					</Show>
-					<Show when={!loading() && !error() && projects().length > 0}>
-						<For each={projects()}>
-							{(project) => (
-								<ProjectCard
-									name={project.name}
-									costEstimate={project.number}
-									projectId={project.id}
-								/>
-							)}
-						</For>
-					</Show>
-				</div>
+				<ProjectList />
 			</main>
 		</>
 	);

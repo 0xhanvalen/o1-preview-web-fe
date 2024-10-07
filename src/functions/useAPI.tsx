@@ -5,6 +5,9 @@ export const useAPI = async (args: {
 	method: "GET" | "POST" | "PUT" | "DELETE";
 	data?: any;
 }) => {
+	if (typeof window === "undefined") {
+		throw new Error("useAPI can only be used on the client-side");
+	}
 	const httpToken = localStorage.getItem("httpToken");
 	const { url, method, data } = args;
 	try {
@@ -16,14 +19,13 @@ export const useAPI = async (args: {
 				Authorization: `Bearer ${httpToken}`,
 			},
 		});
-		console.log({ response });
 		if (response.status !== 200) {
-			throw new Error("Failed to fetch projects");
+			throw new Error("Failed to fetch");
 		}
 
 		return response.data;
 	} catch (error) {
 		console.error(error);
-		return new Error("Failed to fetch projects");
+		return new Error("Failed to fetch");
 	}
 };

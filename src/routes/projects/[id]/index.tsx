@@ -1,8 +1,9 @@
 import { useParams } from "@solidjs/router";
 import { For, Show, createResource, createSignal } from "solid-js";
+import { clientOnly } from "@solidjs/start";
 import { Title } from "@solidjs/meta";
 import api from "~/functions/api";
-import ChatCard from "../_components/chatCard";
+const ChatList = clientOnly(() => import("../_components/chatList"));
 
 const [newChatName, setNewChatName] = createSignal("");
 const [newChatMessage, setNewChatMessage] = createSignal("");
@@ -10,13 +11,6 @@ const [newChatMessage, setNewChatMessage] = createSignal("");
 export default function ProjectSingle() {
 	const params = useParams();
 	const id = (params.id as any as number) * 1;
-	const fetchChat = async () => {
-		const response = await api.chats.list({
-			projectId: id,
-		});
-		return response;
-	};
-	const [projects] = createResource(fetchChat);
 	const handleNameChange = (evt: any) => {
 		console.log(evt.target.value);
 		setNewChatName(evt.target.value);
@@ -55,11 +49,7 @@ export default function ProjectSingle() {
 						Create
 					</button>
 				</div>
-				<Show when={projects()?.length > 0}>
-					<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-						<For each={projects()}>{(item) => <ChatCard chat={item} />}</For>
-					</div>
-				</Show>
+				<ChatList projectId={id} />
 			</main>
 		</>
 	);

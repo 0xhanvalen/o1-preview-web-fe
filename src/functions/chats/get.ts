@@ -10,8 +10,5 @@ export async function get(args: { chatId: string }) {
 			chatId,
 		},
 	});
-	if (response.status !== 200) {
-		throw new Error("Failed to get chat");
-	}
 	return response.result;
 }

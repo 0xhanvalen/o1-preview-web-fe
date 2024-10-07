@@ -10,9 +10,6 @@ export async function list(args: { projectId: number }) {
 			projectId,
 		},
 	});
-	if (response.status !== 200) {
-		throw new Error("Failed to fetch chats");
-	}
 
 	return response.results;
 }
